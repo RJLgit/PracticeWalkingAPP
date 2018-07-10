@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorLightBackground">
+
+    <TextView
+        android:id="@+id/walk_text_view"
+        android:layout_width="148dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/walk_name"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/distance_text_view"
+        android:layout_width="84dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="24dp"
+android:textSize="24dp"
+        android:textStyle="bold"
+        android:text="@string/distance_walked"
+        app:layout_constraintBaseline_toBaselineOf="@+id/walk_text_view"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#FFFFFF"
+        app:layout_constraintBaseline_toBaselineOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
