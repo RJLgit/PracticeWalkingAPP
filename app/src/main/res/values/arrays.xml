@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<array name="pref_color_options_labels">
+    <item>@string/pref_color_label_light</item>
+    <item>@string/pref_color_label_accent</item>
+    <item>@string/pref_color_label_primary</item>
+
+</array>
+
+    <array name="pref_colors_arr">
+        <item>@string/pref_color_light_value</item>
+        <item>@string/pref_color_accent_value</item>
+        <item>@string/pref_color_primary_value</item>
+    </array>
+
+    <array name="prefer_unit_option_labels">
+        <item>@string/pref_units_mile_label</item>
+        <item>@string/pref_units_km_label</item>
+    </array>
+
+    <array name="prefer_unit_option_arr">
+        <item>@string/pref_units_miles</item>
+        <item>@string/pref_units_km</item>
+    </array>
+
+</resources>

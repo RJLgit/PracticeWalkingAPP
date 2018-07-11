@@ -4,4 +4,22 @@
     <string name="distance_walked">Distance walked</string>
     <string name="default_congrats">Default Congratulation text</string>
     <string name="back_button">Add another walk</string>
+    <string name="learn_more_button">Learn more about walking</string>
+    <string name="settings_string">Settings</string>
+    <string name="contact_string">Ask about walks</string>
+    <string name="settings_color_title">Set background color</string>
+    <string name="setting_color_key">Color key</string>
+    <string name="pref_color_label_primary">Primary</string>
+    <string name="pref_color_label_light">Light</string>
+    <string name="pref_color_label_accent">Accent</string>
+    <string name="pref_color_light_value">Light Color</string>
+    <string name="pref_color_primary_value">Primary Color</string>
+    <string name="pref_color_accent_value">Accent Color</string>
+    <string name="pref_units_mile_label">Miles</string>
+    <string name="pref_units_km_label">Km</string>
+    <string name="pref_units_miles">Miles</string>
+    <string name="pref_units_km">Kms</string>
+    <string name="settings_units_key">Units key</string>
+    <string name="units_settings_title">Choose your unit</string>
+
 </resources>

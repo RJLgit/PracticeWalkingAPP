@@ -2,6 +2,8 @@ package com.example.android.practicewalkingapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,19 +14,22 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.provider.Settings.Global.getString;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    public MyAdapter(ListItemClickListener listItemClickListener) {
+    public MyAdapter(Context context, ListItemClickListener listItemClickListener) {
         mListItemClickListener = listItemClickListener;
         WALKS_DATA = DummyData.getWalks();
         DISTANCE_DATA = DummyData.getDistances();
         mNumberItems = WALKS_DATA.size();
+        c = context;
     }
   //  public static final HashMap<String, Integer> MAP_DATA = DummyData.getAllData();
     public static ArrayList<String> WALKS_DATA;
-    public static ArrayList<Integer> DISTANCE_DATA;
+    public static ArrayList<Double> DISTANCE_DATA;
     private int mNumberItems;
     final private ListItemClickListener mListItemClickListener;
-
+    private Context c;
     public interface ListItemClickListener {
         void onListItemClick(int index);
     }
@@ -40,6 +45,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         MyViewHolder viewHolder = new MyViewHolder(view);
 
         return viewHolder;
+    }
+
+    public void setDistanceDataToKm() {
+        ArrayList<Double> n = new ArrayList<>();
+        for (Double i: DISTANCE_DATA) {
+            Double p = i * 0.6;
+
+            p = (double) Math.round(p * 100d) / 100d;
+            n.add(p);
+
+        }
+        DISTANCE_DATA = n;
+    }
+
+    public void setDistanceDatatoM () {
+        DISTANCE_DATA = DummyData.getDistances();
     }
 
     @Override
@@ -64,9 +85,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         }
 
-        void bind(String s, int i) {
+        void bind(String s, Double i) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
+            String units = " " + sharedPreferences.getString(c.getResources().getString(R.string.settings_units_key), c.getResources().getString(R.string.pref_units_miles));
+
             typeOfWalkView.setText(s);
-            distanceOfWalkView.setText(String.valueOf(i) + " miles");
+            distanceOfWalkView.setText(String.valueOf(i) + units);
         }
 
         @Override

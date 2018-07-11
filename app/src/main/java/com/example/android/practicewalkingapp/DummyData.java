@@ -11,7 +11,7 @@ public class DummyData {
 
         // public static HashMap<String, Integer> walks;
         private static ArrayList<String> walks;
-        private static ArrayList<Integer> distances;
+        private static ArrayList<Double> distances;
         /**
          public static void populateMap() {
          walks = new HashMap<String, Integer>();
@@ -64,26 +64,26 @@ public class DummyData {
             return walks;
         }
 
-        public static ArrayList<Integer> getDistances() {
-            distances = new ArrayList<Integer>();
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
-            distances.add(1);
-            distances.add(3);
-            distances.add(5);
+        public static ArrayList<Double> getDistances() {
+            distances = new ArrayList<Double>();
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
+            distances.add(1.0);
+            distances.add(3.0);
+            distances.add(5.2);
             return distances;
         }
 /**

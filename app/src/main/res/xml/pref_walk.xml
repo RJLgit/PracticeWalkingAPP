@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="@string/pref_color_light_value"
+        android:entries="@array/pref_color_options_labels"
+        android:entryValues="@array/pref_colors_arr"
+        android:key="@string/setting_color_key"
+        android:title="@string/settings_color_title"
+        />
+
+    <ListPreference
+        android:defaultValue="@string/pref_units_miles"
+        android:entries="@array/prefer_unit_option_labels"
+        android:entryValues="@array/prefer_unit_option_arr"
+        android:key="@string/settings_units_key"
+        android:title="@string/units_settings_title"
+        />
+
+</PreferenceScreen>
