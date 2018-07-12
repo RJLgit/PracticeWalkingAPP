@@ -21,5 +21,6 @@
     <string name="pref_units_km">Kms</string>
     <string name="settings_units_key">Units key</string>
     <string name="units_settings_title">Choose your unit</string>
+    <string name="main_notification_channel_name">Channel One</string>
 
 </resources>

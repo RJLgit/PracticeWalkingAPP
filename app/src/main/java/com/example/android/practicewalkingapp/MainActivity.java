@@ -138,11 +138,12 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         learnMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri walkPage = Uri.parse("https://en.wikipedia.org/wiki/Walking");
-                Intent inte = new Intent(Intent.ACTION_VIEW, walkPage);
-                if (inte.resolveActivity(getPackageManager()) != null) {
-                    startActivity(inte);
-                }
+                //Uri walkPage = Uri.parse("https://en.wikipedia.org/wiki/Walking");
+               // Intent inte = new Intent(Intent.ACTION_VIEW, walkPage);
+                //if (inte.resolveActivity(getPackageManager()) != null) {
+                   // startActivity(inte);
+                    NotificationUtils.remindUser(MainActivity.this);
+               // }
             }
         });
         setUpSharedPreferences();
