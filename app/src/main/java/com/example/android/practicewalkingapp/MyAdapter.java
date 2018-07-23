@@ -3,12 +3,14 @@ package com.example.android.practicewalkingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +23,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         mListItemClickListener = listItemClickListener;
         WALKS_DATA = DummyData.getWalks();
         DISTANCE_DATA = DummyData.getDistances();
+        ADDRESS_DATA = DummyData.getAddresses();
         mNumberItems = WALKS_DATA.size();
         c = context;
     }
   //  public static final HashMap<String, Integer> MAP_DATA = DummyData.getAllData();
     public static ArrayList<String> WALKS_DATA;
     public static ArrayList<Double> DISTANCE_DATA;
+    public static ArrayList<String> ADDRESS_DATA;
     private int mNumberItems;
     final private ListItemClickListener mListItemClickListener;
     private Context c;
@@ -65,7 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-        holder.bind(WALKS_DATA.get(position), DISTANCE_DATA.get(position));
+        holder.bind(WALKS_DATA.get(position), DISTANCE_DATA.get(position), ADDRESS_DATA.get(position));
     }
 
     @Override
@@ -76,21 +80,41 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView typeOfWalkView;
         TextView distanceOfWalkView;
+        Button mapButton;
+        String addressData;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             typeOfWalkView = (TextView) itemView.findViewById(R.id.walk_text_view);
             distanceOfWalkView = (TextView) itemView.findViewById(R.id.distance_text_view);
+            addressData = "1600 Ampitheatre Parkway, CA";
+            mapButton = (Button) itemView.findViewById(R.id.mapButton);
+            mapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String add = addressData;
+                    Uri.Builder builder = new Uri.Builder();
+                    builder.scheme("geo").path("0,0").query(add);
+                    Uri addressUri = builder.build();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(addressUri);
+                    c.startActivity(intent);
+
+
+                }
+            });
             itemView.setOnClickListener(this);
 
         }
 
-        void bind(String s, Double i) {
+        void bind(String s, Double i, String a) {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
             String units = " " + sharedPreferences.getString(c.getResources().getString(R.string.settings_units_key), c.getResources().getString(R.string.pref_units_miles));
 
             typeOfWalkView.setText(s);
             distanceOfWalkView.setText(String.valueOf(i) + units);
+            addressData = a;
+
         }
 
         @Override

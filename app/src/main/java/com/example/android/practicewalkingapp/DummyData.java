@@ -12,6 +12,7 @@ public class DummyData {
         // public static HashMap<String, Integer> walks;
         private static ArrayList<String> walks;
         private static ArrayList<Double> distances;
+        private static ArrayList<String> addresses;
         /**
          public static void populateMap() {
          walks = new HashMap<String, Integer>();
@@ -85,6 +86,30 @@ public class DummyData {
             distances.add(3.0);
             distances.add(5.2);
             return distances;
+        }
+
+        public static ArrayList<String> getAddresses() {
+            addresses = new ArrayList<String>();
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("1600 Pennsylvania Ave NW, Washington, DC 20500, USA");
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("Brighton, UK");
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("Brighton, UK");
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("Brighton, UK");
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("Brighton, UK");
+            addresses.add("Boston, UK");
+            addresses.add("Alnwick, UK");
+            addresses.add("Brighton, UK");
+            return addresses;
+
         }
 /**
  public static HashMap<String, Integer> getAllData() {

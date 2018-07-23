@@ -15,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements MyAdapter.ListItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int NUM_OF_ITEMS = 18;
     private MyAdapter myAdapter;
     private RecyclerView mWalksList;
     private Button learnMoreButton;
+    private Button mapButton;
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -134,6 +137,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         myAdapter = new MyAdapter(this,this);
 
         mWalksList.setAdapter(myAdapter);
+
+
+
         learnMoreButton = (Button) findViewById(R.id.learnbutton);
         learnMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
