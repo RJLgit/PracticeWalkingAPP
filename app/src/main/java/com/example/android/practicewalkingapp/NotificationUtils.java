@@ -50,7 +50,7 @@ public class NotificationUtils {
        Intent ignoreReminderIntent = new Intent(context, WalkReminderIntentService.class);
        ignoreReminderIntent.setAction(ReminderTasks.ACTION_DISMISS_NOT);
        PendingIntent ignorePendingIntent = PendingIntent.getService(context, ACTION_IGNORE_PENDING_INTENT_ID, ignoreReminderIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-       NotificationCompat.Action ignoreReminderAction = new NotificationCompat.Action(R.drawable.ic_launcher_foreground, "No", ignorePendingIntent);
+       NotificationCompat.Action ignoreReminderAction = new NotificationCompat.Action(R.drawable.ic_cancel_black_24px, "No", ignorePendingIntent);
        return ignoreReminderAction;
     }
 

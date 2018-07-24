@@ -8,9 +8,9 @@ public class ReminderTasks {
     public static final String ACTION_CHARGING_REMINDER = "charging-reminder";
 
     public static void exectueTask(Context context, String action) {
-        if (action.equals(ACTION_DISMISS_NOT)) {
+        if (ACTION_DISMISS_NOT.equals(action)) {
             NotificationUtils.clearAllNotifications(context);
-        } else if (action.equals(ACTION_CHARGING_REMINDER)) {
+        } else if (ACTION_CHARGING_REMINDER.equals(action)) {
             issueChargingReminder(context);
         }
     }
