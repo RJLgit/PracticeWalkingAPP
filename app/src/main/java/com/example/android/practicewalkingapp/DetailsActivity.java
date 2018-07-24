@@ -26,12 +26,12 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String whichWalk = null;
-        int whichDistance = 0;
+        double whichDistance = 0;
         if (intent.hasExtra("Walk")) {
             whichWalk = intent.getStringExtra("Walk");
         }
         if (intent.hasExtra("Distance")) {
-            whichDistance = intent.getIntExtra("Distance", 0);
+            whichDistance = intent.getDoubleExtra("Distance", 0);
         }
         if (whichWalk != null) {
             congratsTextView.setText("Congrats, you have completed the " + whichWalk + " walk, which covered a distance of " + String.valueOf(whichDistance) + " miles.");
