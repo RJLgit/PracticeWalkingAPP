@@ -7,18 +7,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailsActivity extends AppCompatActivity {
 
-    TextView congratsTextView;
-    Button backButton;
+    @BindView(R.id.message_text_view) TextView congratsTextView;
+    @BindView(R.id.back_button) Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
-        congratsTextView = (TextView) findViewById(R.id.message_text_view);
-        backButton = (Button) findViewById(R.id.back_button);
+        ButterKnife.bind(this);
+        //congratsTextView = (TextView) findViewById(R.id.message_text_view);
+       // backButton = (Button) findViewById(R.id.back_button);
 
 
         Intent intent = getIntent();

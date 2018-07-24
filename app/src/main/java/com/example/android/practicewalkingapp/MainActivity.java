@@ -17,12 +17,18 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity implements MyAdapter.ListItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int NUM_OF_ITEMS = 18;
     private MyAdapter myAdapter;
-    private RecyclerView mWalksList;
-    private Button learnMoreButton;
+    @BindView(R.id.my_recycle_view)
+    RecyclerView mWalksList;
+    @BindView(R.id.learnbutton)
+    Button learnMoreButton;
     private Button mapButton;
 
     @Override
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
             mWalksList.setLayoutManager(layoutManager);
 
             mWalksList.setHasFixedSize(true);
-            myAdapter = new MyAdapter(this,this);
+            myAdapter = new MyAdapter(this, this);
             myAdapter.setDistanceDatatoM();
 
             mWalksList.setAdapter(myAdapter);
@@ -113,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         }
         if (id == R.id.contact_settings) {
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            String[] add = { "enquiries@nationaltrust.org.uk" };
+            String[] add = {"enquiries@nationaltrust.org.uk"};
             emailIntent.setType("*/*");
             emailIntent.putExtra(Intent.EXTRA_EMAIL, add);
             if (emailIntent.resolveActivity(getPackageManager()) != null) {
@@ -127,34 +133,43 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mWalksList = (RecyclerView) findViewById(R.id.my_recycle_view);
-       // mWalksList.addItemDecoration(new DividerItemDecoration(mWalksList.getContext(), DividerItemDecoration.HORIZONTAL));
+        ButterKnife.bind(this);
+        // mWalksList = (RecyclerView) findViewById(R.id.my_recycle_view);
+        // mWalksList.addItemDecoration(new DividerItemDecoration(mWalksList.getContext(), DividerItemDecoration.HORIZONTAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mWalksList.setLayoutManager(layoutManager);
 
         mWalksList.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this,this);
+        myAdapter = new MyAdapter(this, this);
 
         mWalksList.setAdapter(myAdapter);
         ReminderUtils.scheduleChargingReminder(this);
 
 
-        learnMoreButton = (Button) findViewById(R.id.learnbutton);
-        learnMoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri walkPage = Uri.parse("https://en.wikipedia.org/wiki/Walking");
-                Intent inte = new Intent(Intent.ACTION_VIEW, walkPage);
-                if (inte.resolveActivity(getPackageManager()) != null) {
-                   startActivity(inte);
-                   // NotificationUtils.remindUser(MainActivity.this);
-               }
-            }
+        // learnMoreButton = (Button) findViewById(R.id.learnbutton);
+        /**
+         learnMoreButton.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+        Uri walkPage = Uri.parse("https://en.wikipedia.org/wiki/Walking");
+        Intent inte = new Intent(Intent.ACTION_VIEW, walkPage);
+        if (inte.resolveActivity(getPackageManager()) != null) {
+        startActivity(inte);
+        // NotificationUtils.remindUser(MainActivity.this);
+        }
+        }
         });
+         */
         setUpSharedPreferences();
 
 
+    }
 
+    @OnClick(R.id.learnbutton)
+    public void learnMoreClick() {
+        Uri walkPage = Uri.parse("https://en.wikipedia.org/wiki/Walking");
+        Intent inte = new Intent(Intent.ACTION_VIEW, walkPage);
+        if (inte.resolveActivity(getPackageManager()) != null) {
+            startActivity(inte);
+        }
     }
 }
