@@ -54,7 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void setDistanceDataToKm() {
         ArrayList<Double> n = new ArrayList<>();
         for (Double i: DISTANCE_DATA) {
-            Double p = i * 0.6;
+            Double p = i * 1.61;
 
             p = (double) Math.round(p * 100d) / 100d;
             n.add(p);

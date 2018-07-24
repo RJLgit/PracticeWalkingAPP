@@ -1,6 +1,8 @@
 package com.example.android.practicewalkingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,8 +24,8 @@ public class DetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //congratsTextView = (TextView) findViewById(R.id.message_text_view);
        // backButton = (Button) findViewById(R.id.back_button);
-
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String ss = sharedPreferences.getString(getString(R.string.settings_units_key), getString(R.string.pref_units_miles));
         Intent intent = getIntent();
         String whichWalk = null;
         double whichDistance = 0;
@@ -34,7 +36,12 @@ public class DetailsActivity extends AppCompatActivity {
             whichDistance = intent.getDoubleExtra("Distance", 0);
         }
         if (whichWalk != null) {
-            congratsTextView.setText("Congrats, you have completed the " + whichWalk + " walk, which covered a distance of " + String.valueOf(whichDistance) + " miles.");
+            if (ss.equals(getString(R.string.pref_units_miles))) {
+                congratsTextView.setText("Congrats, you have completed the " + whichWalk + " walk, which covered a distance of " + String.valueOf(whichDistance) + " miles.");
+            } else if (ss.equals(getString(R.string.pref_units_km))) {
+                congratsTextView.setText("Congrats, you have completed the " + whichWalk + " walk, which covered a distance of " + String.valueOf(whichDistance) + " Kms.");
+            }
+
         }
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
