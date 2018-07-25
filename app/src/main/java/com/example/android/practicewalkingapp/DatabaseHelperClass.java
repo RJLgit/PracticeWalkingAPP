@@ -2,6 +2,7 @@ package com.example.android.practicewalkingapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -46,5 +47,11 @@ public class DatabaseHelperClass extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_NAME, null);
+        return cursor;
     }
 }

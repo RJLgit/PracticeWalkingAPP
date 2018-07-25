@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
             mWalksList.setLayoutManager(layoutManager);
 
             mWalksList.setHasFixedSize(true);
-            myAdapter = new MyAdapter(this, this);
+            myAdapter = new MyAdapter(this, this, myDb);
             myAdapter.setDistanceDatatoM();
 
             mWalksList.setAdapter(myAdapter);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
             mWalksList.setLayoutManager(layoutManager);
 
             mWalksList.setHasFixedSize(true);
-            myAdapter = new MyAdapter(this, this);
+            myAdapter = new MyAdapter(this, this, myDb);
             myAdapter.setDistanceDataToKm();
 
             mWalksList.setAdapter(myAdapter);
@@ -145,16 +145,16 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         // mWalksList.addItemDecoration(new DividerItemDecoration(mWalksList.getContext(), DividerItemDecoration.HORIZONTAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mWalksList.setLayoutManager(layoutManager);
-
-        mWalksList.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this, this);
-
-        mWalksList.setAdapter(myAdapter);
-        ReminderUtils.scheduleChargingReminder(this);
         if (myDb == null)
         {
             myDb = new DatabaseHelperClass(this);
         }
+        mWalksList.setHasFixedSize(true);
+        myAdapter = new MyAdapter(this, this, myDb);
+
+        mWalksList.setAdapter(myAdapter);
+        ReminderUtils.scheduleChargingReminder(this);
+
 
         // learnMoreButton = (Button) findViewById(R.id.learnbutton);
         /**

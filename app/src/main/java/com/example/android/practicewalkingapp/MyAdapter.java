@@ -3,8 +3,10 @@ package com.example.android.practicewalkingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,12 +21,15 @@ import java.util.ArrayList;
 import static android.provider.Settings.Global.getString;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    public MyAdapter(Context context, ListItemClickListener listItemClickListener) {
+    public MyAdapter(Context context, ListItemClickListener listItemClickListener, DatabaseHelperClass databaseHelperClass) {
+
+        mData = databaseHelperClass.getAllData();
         mListItemClickListener = listItemClickListener;
         WALKS_DATA = DummyData.getWalks();
         DISTANCE_DATA = DummyData.getDistances();
         ADDRESS_DATA = DummyData.getAddresses();
-        mNumberItems = WALKS_DATA.size();
+        // mNumberItems = WALKS_DATA.size();
+        mNumberItems = mData.getCount();
         c = context;
     }
   //  public static final HashMap<String, Integer> MAP_DATA = DummyData.getAllData();
@@ -34,9 +39,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private int mNumberItems;
     final private ListItemClickListener mListItemClickListener;
     private Context c;
+    private Cursor mData;
+
     public interface ListItemClickListener {
         void onListItemClick(int index);
     }
+
 
     @NonNull
     @Override
@@ -69,7 +77,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-        holder.bind(WALKS_DATA.get(position), DISTANCE_DATA.get(position), ADDRESS_DATA.get(position));
+        mData.moveToPosition(position);
+
+
+
+        holder.bind(mData.getString(1), mData.getDouble(2), mData.getString(3));
+
+        // holder.bind(WALKS_DATA.get(position), DISTANCE_DATA.get(position), ADDRESS_DATA.get(position));
     }
 
     @Override
