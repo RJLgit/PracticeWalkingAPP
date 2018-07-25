@@ -21,13 +21,13 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycle_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
 
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/learnbutton"
+        app:layout_constraintBottom_toTopOf="@+id/databasebutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +35,19 @@
 
 
     </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/databasebutton"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Add a walk to database"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/learnbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

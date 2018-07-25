@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
     @BindView(R.id.learnbutton)
     Button learnMoreButton;
     private Button mapButton;
+    @BindView(R.id.databasebutton) Button dataBut;
+    public static DatabaseHelperClass myDb;
+
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -129,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         return super.onOptionsItemSelected(item);
     }
 
+    public static DatabaseHelperClass getMyDatabase() {
+        return myDb;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +151,10 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
 
         mWalksList.setAdapter(myAdapter);
         ReminderUtils.scheduleChargingReminder(this);
-
+        if (myDb == null)
+        {
+            myDb = new DatabaseHelperClass(this);
+        }
 
         // learnMoreButton = (Button) findViewById(R.id.learnbutton);
         /**
@@ -162,6 +172,12 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         setUpSharedPreferences();
 
 
+    }
+
+    @OnClick(R.id.databasebutton)
+    public void dataButClick() {
+        Intent i = new Intent(this, addToDatabase.class);
+        startActivity(i);
     }
 
     @OnClick(R.id.learnbutton)
