@@ -39,7 +39,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".addToDatabase"></activity>
+        <activity android:name=".addToDatabase" />
+        <activity android:name=".DeleteConfirmAct"></activity>
     </application>
 
 </manifest>

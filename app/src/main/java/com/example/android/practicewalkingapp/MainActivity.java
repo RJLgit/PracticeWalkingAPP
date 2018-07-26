@@ -58,24 +58,31 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
 
     private void changeUnits(String s) {
         if (s.equals(getString(R.string.pref_units_miles))) {
+            MyAdapter.miles = true;
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             mWalksList.setLayoutManager(layoutManager);
 
             mWalksList.setHasFixedSize(true);
             myAdapter = new MyAdapter(this, this, myDb);
-            myAdapter.setDistanceDatatoM();
+            // myAdapter.setDistanceDatatoM();
 
             mWalksList.setAdapter(myAdapter);
+        /**
+
+         */
         }
         if (s.equals(getString(R.string.pref_units_km))) {
+            MyAdapter.miles = false;
+           // /**
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             mWalksList.setLayoutManager(layoutManager);
 
             mWalksList.setHasFixedSize(true);
             myAdapter = new MyAdapter(this, this, myDb);
-            myAdapter.setDistanceDataToKm();
+           // myAdapter.setDistanceDataToKm();
 
             mWalksList.setAdapter(myAdapter);
+            //*/
         }
     }
 
@@ -99,9 +106,20 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
 
     @Override
     public void onListItemClick(int index) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String ss = sharedPreferences.getString(getString(R.string.settings_units_key), getString(R.string.pref_units_miles));
         Intent i = new Intent(this, DetailsActivity.class);
-        i.putExtra("Walk", MyAdapter.WALKS_DATA.get(index));
-        i.putExtra("Distance", MyAdapter.DISTANCE_DATA.get(index));
+        MyAdapter.mData.moveToPosition(index);
+        i.putExtra("Walk", MyAdapter.mData.getString(1));
+        //add if/else to check shared preferences for miles or kms
+        if (ss.equals("Miles")) {
+            i.putExtra("Distance", MyAdapter.mData.getDouble(2));
+        } else if (ss.equals("Kms")) {
+            Double k = MyAdapter.mData.getDouble(2) * 1.61;
+            k = (double) Math.round(k * 100d) / 100d;
+            i.putExtra("Distance", k);
+        }
+
         startActivity(i);
     }
 

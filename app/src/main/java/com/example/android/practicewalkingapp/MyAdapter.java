@@ -31,16 +31,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // mNumberItems = WALKS_DATA.size();
         mNumberItems = mData.getCount();
         c = context;
+    db = databaseHelperClass;
     }
   //  public static final HashMap<String, Integer> MAP_DATA = DummyData.getAllData();
     public static ArrayList<String> WALKS_DATA;
     public static ArrayList<Double> DISTANCE_DATA;
     public static ArrayList<String> ADDRESS_DATA;
+    public static ArrayList<String> ID_DATA;
     private int mNumberItems;
     final private ListItemClickListener mListItemClickListener;
     private Context c;
-    private Cursor mData;
-
+    public static Cursor mData;
+    public static boolean miles = true;
+    public static DatabaseHelperClass db;
     public interface ListItemClickListener {
         void onListItemClick(int index);
     }
@@ -80,8 +83,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         mData.moveToPosition(position);
 
 
+        if (miles == true) {
+            holder.bind(mData.getString(1), mData.getDouble(2), mData.getString(3), String.valueOf(mData.getInt(0)));
+        } else {
+            Double k = mData.getDouble(2) * 1.61;
+            k = (double) Math.round(k * 100d) / 100d;
+            holder.bind(mData.getString(1), k, mData.getString(3), String.valueOf(mData.getInt(0)));
+        }
 
-        holder.bind(mData.getString(1), mData.getDouble(2), mData.getString(3));
 
         // holder.bind(WALKS_DATA.get(position), DISTANCE_DATA.get(position), ADDRESS_DATA.get(position));
     }
@@ -96,8 +105,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView distanceOfWalkView;
         Button mapButton;
         String addressData;
+        String id;
+        Button delButton;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
             typeOfWalkView = (TextView) itemView.findViewById(R.id.walk_text_view);
             distanceOfWalkView = (TextView) itemView.findViewById(R.id.distance_text_view);
@@ -117,18 +128,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                 }
             });
+            delButton = (Button) itemView.findViewById(R.id.deleteButton);
+            delButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   // int i = getAdapterPosition() + 1;
+                  //  String s = String.valueOf(i);
+                    String s = id;
+                    Integer succ = MyAdapter.db.deleteData(s);
+
+                    if (succ > 0) {
+                        Toast.makeText(itemView.getContext(), "Data deleted", Toast.LENGTH_LONG).show();
+                        mData = MyAdapter.db.getAllData();
+                        Intent i = new Intent(itemView.getContext(), DeleteConfirmAct.class);
+                        c.startActivity(i);
+
+                    } else {
+                        Toast.makeText(itemView.getContext(), "Data not deleted", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
             itemView.setOnClickListener(this);
 
         }
 
-        void bind(String s, Double i, String a) {
+        void bind(String s, Double i, String a, String ip) {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
             String units = " " + sharedPreferences.getString(c.getResources().getString(R.string.settings_units_key), c.getResources().getString(R.string.pref_units_miles));
 
             typeOfWalkView.setText(s);
             distanceOfWalkView.setText(String.valueOf(i) + units);
             addressData = a;
-
+            id = ip;
         }
 
         @Override
